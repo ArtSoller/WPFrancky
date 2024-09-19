@@ -66,11 +66,16 @@ services:
       - "5678:5678"
     volumes:
       - ./n8n_data:/root/.n8n
+      - /etc/letsencrypt/:/etc/letsencrypt/
     environment:
       - N8N_BASIC_AUTH_ACTIVE=true
       - N8N_BASIC_AUTH_USER=artyom
       - N8N_BASIC_AUTH_PASSWORD=access
-      - N8N_URL=https://first.dre.mov:5678
+      - N8N_URL=https://third.dre.mov:5678
       - N8N_PROTOCOL=https
+      - N8N_PORT = 5678
+      - N8N_SSL_KEY=/etc/letsencrypt/live/third.dre.mov/privkey.pem
+      - N8N_SSL_CERT=/etc/letsencrypt/live/third.dre.mov/fullchain.pem
+      - WEBHOOK_URL=https://n8n.third.dre.mov/
     depends_on:
       - db
